@@ -2,7 +2,7 @@
 
 ## Description
 
-With this simple application, users can create notes or to-do's to keep their lives organized. This application will use an Express.js back end and will save and retrieve note data from a JSON file. Finally, the app is deployed to [Heroku](https://heroku.com/).
+With this simple application, users can create notes or to-do's to keep their lives organized. This application will use an Express.js back end and will save and retrieve note data from a JSON file. Finally, the app is deployed to [Heroku](https://the-best-note-taker-09.herokuapp.com/).
 
 ## Table of Contents
 
