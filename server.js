@@ -1,6 +1,8 @@
 const express = require("express");
+const { fstat } = require("fs");
 const path = require("path");
 const notes = require("./db/db.json");
+const fs = require("fs");
 
 const PORT = process.env.PORT || 3000;
 
@@ -22,8 +24,16 @@ app.get("/notes", (req, res) => {
 });
 
 // Read the db.json file and return all saved notes as JSON
-app.get("/api/notes", (req, res) => {
-  res.json(notes);
+app.get("/api/notes", (req, res, next) => {
+  fs.readFile("./db/db.json", (err, notes) => {
+    if (err) {
+      next(err);
+    } else {
+      res.send(notes);
+    }
+  });
+
+  //res.json(notes);
 });
 
 // Receive a new note to save on the request body, add it to the db.json file, and then return the new note to the client
