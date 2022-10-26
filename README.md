@@ -30,9 +30,9 @@ When you open the Note Taker, you're presented with a landing page with a link t
 
 ### Images
 
-![alt text](assets/homepage.png)
-![alt text](assets/where-to-type.png)
-![alt text](assets/where-to-delete.png)
+![alt text](images/homepage.png)
+![alt text](images/where-to-type.png)
+![alt text](images/where-to-delete.png)
 
 ## Credits
 
