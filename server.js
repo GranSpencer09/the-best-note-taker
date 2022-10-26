@@ -45,20 +45,16 @@ app.post("/api/notes", (req, res, next) => {
   };
   // Reading notes from db
   fs.readFile("./db/db.json", "utf-8", (err, data) => {
-    if (err) {
-      console.log(err);
-    } else {
-      // Convert data from db into an object and push the newNote to it
-      const notes = JSON.parse(data);
-      notes.push(newNote);
-      // Write new note to db, must convert it back to JSON
-      fs.writeFile("./db/db.json", JSON.stringify(notes), (err) => {
-        if (err) {
-          console.log(err);
-        } else console.log("Note was added");
-        res.sendStatus(200);
-      });
-    }
+    // Convert data from db into an object and push the newNote to it
+    const notes = JSON.parse(data);
+    notes.push(newNote);
+    // Write new note to db, must convert it back to JSON
+    fs.writeFile("./db/db.json", JSON.stringify(notes), (err) => {
+      if (err) {
+        console.log(err);
+      } else console.log("Note was added");
+      res.sendStatus(200);
+    });
   });
 });
 
@@ -66,20 +62,17 @@ app.post("/api/notes", (req, res, next) => {
 app.delete("/api/notes/:id", (req, res, next) => {
   // Reading notes from db
   fs.readFile("./db/db.json", "utf-8", (err, data) => {
-    if (err) {
-      console.log(err);
-    } else {
-      let notes = JSON.parse(data);
-      // Removing note with given id property
-      let notesToKeep = notes.filter((note) => note.id !== req.params.id);
-      // Write the notes to the db, this won't have the note with given id property
-      fs.writeFile("./db/db.json", JSON.stringify(notesToKeep), (err) => {
-        if (err) {
-          console.log(err);
-        } else console.log("Note was deleted");
-        res.sendStatus(200);
-      });
-    }
+    // Convert data from db into an object
+    let notes = JSON.parse(data);
+    // Removing note with given id property
+    let notesToKeep = notes.filter((note) => note.id !== req.params.id);
+    // Write the notes to the db, this won't have the note with given id property
+    fs.writeFile("./db/db.json", JSON.stringify(notesToKeep), (err) => {
+      if (err) {
+        console.log(err);
+      } else console.log("Note was deleted");
+      res.sendStatus(200);
+    });
   });
 });
 
