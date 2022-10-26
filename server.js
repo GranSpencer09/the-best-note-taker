@@ -32,11 +32,32 @@ app.get("/api/notes", (req, res, next) => {
       res.send(notes);
     }
   });
-
-  //res.json(notes);
 });
 
 // Receive a new note to save on the request body, add it to the db.json file, and then return the new note to the client
-app.post("api/notes", (req, res) => {});
+app.post("/api/notes", (req, res, next) => {
+  // New object for each new note assigning title and text the values provided
+  let newNote = {
+    title: req.body.title,
+    text: req.body.text,
+    // id: newId,
+  };
+  fs.readFile("./db/db.json", (err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      const notes = JSON.parse(data);
+      notes.push(newNote);
+      fs.writeFile("./db/db.json", JSON.stringify(notes), (err) => {
+        if (err) {
+          console.log(err);
+        } else console.log("Note was added");
+        res.json(200);
+      });
+    }
+  });
+});
+
+app.delete("/api/notes", (req, res, next) => {});
 
 app.listen(PORT, () => console.log(`App listing on port ${PORT}`));
